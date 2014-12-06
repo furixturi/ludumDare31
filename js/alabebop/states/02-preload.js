@@ -3,6 +3,9 @@ alabebop.PreloadState = function (game) {}
 alabebop.PreloadState.prototype = {
 
     preload : function () {
+        // progress bar
+        //this.preloadBg = this.add.sprite((320-297)/2, (480-145)/2, 'preloaderBg');
+        //this.preloadBar = this.add.sprite((320-158)/2, (480-50)/2, 'preloaderBar');
 
         //TODO: load game assets
         //button assets
