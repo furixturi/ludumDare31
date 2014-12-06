@@ -4,13 +4,7 @@ alabebop.LevelMasterState.prototype = {
 
     init: function(levelData) {
 
-        this.levelData = levelData ? levelData : {
-            level : 1,
-            round : 1,
-            currentScore : 0,
-            totalScore : 0,
-            replay : false
-        };
+        this.levelData = levelData ? levelData : alabebop.gameSetting.levelDataInitial;
 
     },
 
@@ -62,7 +56,15 @@ alabebop.LevelMasterState.prototype = {
 
         this.levelData.round = 1;
 
-        this.game.state.start('level-intro', true, false, this.levelData);
+        if( this.levelData.level <= this.levelData.totalLevels ) {
+
+            this.game.state.start('level-intro', true, false, this.levelData);
+
+        } else {
+
+            this.game.state.start('ending', true, false, this.levelData);
+
+        }
 
     },
 
