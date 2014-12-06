@@ -10,27 +10,60 @@ alabebop.LevelMasterState.prototype = {
 
     create: function() {
 
-        this.decideLevelState();
-
-    },
-
-    decideLevelState : function() {
-
-        if( this.isFirstLevel() || ( this.getWin() && !this.getReplay()) ) {
+        if ( this.isFirstLevel() || this.isLastLevel() ) {
 
             this.nextLevel();
 
-        } else if ( !this.getWin() || this.getReplay() ) {
+        } else {
 
-            this.nextRound();
+            if( this.getWin() ) {
+
+                this.createWinScreen();
+
+            } else {
+
+                this.createLoseScreen();
+
+            }
 
         }
 
     },
 
+    createWinScreen : function () {
+
+        //create win message
+
+        //create next level button
+        /**
+         * API: new Button(game, x, y, asset key, callback, callbackContext, overFrame, outFrame, downFrame, upFrame)
+         */
+        var nextLevelBtn = game.add.button(game.world.centerX - 200, 400, 'nextLevelBtn', nextLevel, this, 1, 0, 2);
+        //create replay this level button
+        var nextRoundBtn = game.add.button(game.world.centerX - 200, 480, 'nextRoundBtn', nextRound, this, 1, 0, 2);
+
+
+    },
+
+    createLoseScreen : function () {
+
+        //create lose message
+
+        //create replay this level button
+        var nextRoundBtn = game.add.button(game.world.centerX - 200, 480, 'nextRoundBtn', nextRound, this, 1, 0, 2);
+
+    },
+
+
     isFirstLevel : function () {
 
         return this.levelData.level === 1;
+
+    },
+
+    isLastLevel : function () {
+
+        return this.levelData.level === this.levelData.totalLevels;
 
     },
 
@@ -40,15 +73,7 @@ alabebop.LevelMasterState.prototype = {
 
     },
 
-    getReplay : function () {
-
-        return this.levelData.replay;
-
-    },
-
     nextLevel : function () {
-
-        this.levelData.level++;
 
         this.levelData.totalScore += this.levelData.currentScore;
 
@@ -56,7 +81,9 @@ alabebop.LevelMasterState.prototype = {
 
         this.levelData.round = 1;
 
-        if( this.levelData.level <= this.levelData.totalLevels ) {
+        if( !this.isLastLevel() ) {
+
+            this.levelData.level++;
 
             this.game.state.start('level-intro', true, false, this.levelData);
 
@@ -71,6 +98,8 @@ alabebop.LevelMasterState.prototype = {
     nextRound : function () {
 
         this.levelData.round++;
+
+        this.levelData.currentScore = 0;
 
         //'state name', clearWorld, clearCache, parameter for next state's init
         this.game.state.start('level-round', true, false, this.levelData);

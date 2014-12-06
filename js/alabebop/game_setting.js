@@ -8,7 +8,6 @@ alabebop.gameSetting = {
         totalLevels : 5,
         currentScore : 0,
         totalScore : 0,
-        replayRound : false,
         replayGame : false
     }
 
