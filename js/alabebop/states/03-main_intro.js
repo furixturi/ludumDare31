@@ -6,7 +6,9 @@ alabebop.MainIntroState.prototype = {
 
         //TODO: add main intro assets
 
-        this.tweenFadeState()
+        //this.tweenFadeState()
+
+        this.game.state.start('main-menu');
 
     },
 
