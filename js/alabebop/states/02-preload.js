@@ -11,11 +11,15 @@ alabebop.PreloadState.prototype = {
         //button assets
         game.load.spritesheet('nextLevelBtn', 'assets/buttons/next_level_button.png', 400, 50);
         game.load.spritesheet('nextRoundBtn', 'assets/buttons/next_round_button.png', 400, 50);
+        game.load.spritesheet('playBtn', 'assets/buttons/play_button.png', 400, 50);
+        game.load.spritesheet('playAgainBtn', 'assets/buttons/play_again_button.png', 400, 50);
+
     },
 
     create : function () {
 
         this.game.state.start('main-intro')
+        
     }
 
 }

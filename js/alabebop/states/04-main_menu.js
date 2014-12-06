@@ -2,11 +2,25 @@ alabebop.MainMenuState = function(game) {};
 
 alabebop.MainMenuState.prototype = {
 
-    create: function(){
-        this.enterKey = this.game.input.keyboard.
-            addKey(Phaser.Keyboard.ENTER)
+    init: function(levelData) {
 
-        this.enterKey.onDown.add(this.tweenPlayState, this);
+        this.levelData = levelData ? levelData : $.extend({}, alabebop.gameSetting.levelDataInitial)
+
+    },
+
+    create: function(){
+
+        // create title
+
+        // create play button
+        var playBtn = game.add.button(game.world.centerX - 200, 400, 'playBtn', tweenPlayState, this, 1, 0, 2);
+
+        //PHASE 2: if replay, create level selection menu
+
+        /*if( this.levelData.replayGame) {
+
+        }*/
+
     },
 
     tweenPlayState: function(){
@@ -17,7 +31,7 @@ alabebop.MainMenuState.prototype = {
             to({alpha: 1}, 2000);
 
         tweenFadeIn.onComplete.add(function() {
-            this.game.state.start('level-master');
+            this.game.state.start('level-master', true, false, this.levelData);
         }, this);
 
         tweenMenuShrink.chain(tweenFadeIn);

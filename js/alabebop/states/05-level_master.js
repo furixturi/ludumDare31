@@ -4,7 +4,7 @@ alabebop.LevelMasterState.prototype = {
 
     init: function(levelData) {
 
-        this.levelData = levelData ? levelData : alabebop.gameSetting.levelDataInitial;
+        this.levelData = levelData ? levelData : $.extend({}, alabebop.gameSetting.levelDataInitial};
 
     },
 
