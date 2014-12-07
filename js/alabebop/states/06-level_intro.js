@@ -12,6 +12,7 @@ alabebop.LevelIntroState.prototype = {
             to({alpha: 0}, 1000, Phaser.Easing.Linear.None, true);
 
         tweenIntro.onComplete.add(this.levelStart, this)
+        tweenIntro.start()
     },
 
     levelStart: function() {

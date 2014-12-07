@@ -11,10 +11,10 @@ alabebop.BootState.prototype = {
     create : function () {
         //setup game environment, input, etc...
         this.game.input.maxPointers = 1;
-        this.game.stage.scaleMode = Phaser.StageScaleMode.SHOW_ALL;
-        this.game.stage.scale.pageAlignHorizontally = true;
-        this.game.stage.scale.pageAlignVertically = true;
-        this.game.stage.scale.setScreenSize(true);
+        this.game.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+        this.game.scale.pageAlignHorizontally = true;
+        this.game.scale.pageAlignVertically = true;
+        this.game.scale.setScreenSize(true);
         this.game.state.start('preload');
 
     }

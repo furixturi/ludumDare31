@@ -7,12 +7,8 @@ alabebop.LevelRoundState.prototype = {
     },
 
     create: function() {
+        console.log('level_round')
 
-
-
-    },
-
-    levelStart: function() {
 
     }
 
