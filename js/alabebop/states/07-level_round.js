@@ -98,7 +98,7 @@ alabebop.LevelRoundState.prototype = {
 
             } else {
 
-                newFigure = this.figures.create( 308, 116, 'figure_2');
+                newFigure = this.figures.create( 308, 116, 'figure_t');
 
             }
 
