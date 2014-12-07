@@ -90,19 +90,6 @@ alabebop.LevelRoundState.prototype = {
             this.game.width, y + newPlank.height);
     },
 
-    newPlankPos : function(index) {
-
-        if( !this.grid ) {
-            this.grid = this.calcGrid(this.game.gameSetting.setting.gridSizes[this.levelData.level])
-        }
-
-        return {
-            minX : 200,
-            minY : 260
-        }
-
-    },
-
     createNewFigure : function () {
 
         if( this.figures.length < this.game.gameSetting.setting.totalFigures ) {

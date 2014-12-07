@@ -33,6 +33,7 @@ alabebop.PreloadState.prototype = {
         this.game.load.image('pool_1', 'assets/level-round/pool_1.png');
         this.game.load.image('pool_2', 'assets/level-round/pool_2.png');
         this.game.load.image('plank', 'assets/level-round/plank.png');
+        this.game.load.image('car_0', 'assets/level-round/pool_car.png');
 
     },
 
