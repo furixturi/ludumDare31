@@ -10,7 +10,7 @@ alabebop.LevelRoundState.prototype = {
 
         //enable physics
         this.game.physics.startSystem(Phaser.Physics.ARCADE);
-
+        this.game.physics.arcade.gravity.y = 150;
         //add background
         this.game.add.sprite(0, 0, 'castle');
         //create
@@ -18,7 +18,6 @@ alabebop.LevelRoundState.prototype = {
         this.createPlanks();
         this.createPools();
 
-        this.game.time.events.loop(Phaser.Timer.SECOND, this.createNewFigure, this);
 
     },
 
@@ -35,30 +34,7 @@ alabebop.LevelRoundState.prototype = {
 
         this.createNewFigure();
 
-/*        for( var i = 0; i < this.game.gameSetting.setting.totalFigures; i++ ) {
-
-            var probability = Math.random(),
-                newFigure;
-
-            if(probability  <= probabilityK ) {
-                console.log('probability: ', probability, 'create k')
-                newFigure = this.figures.create( i * 64, 0, 'figure_k');
-
-            } else {
-                console.log('probability: ', probability, 'create t')
-                newFigure = this.figures.create( i * 64, 0, 'figure_2');
-            }
-
-
-            newFigure.frame = 5;
-            newFigure.animations.add('bumpTop', [0], 10, true);
-            newFigure.animations.add('bumpBottom', [1], 10, true);
-            newFigure.animations.add('bumpRight', [2], 10, true);
-            newFigure.animations.add('bumpLeft', [3], 10, true);
-            newFigure.animations.add('jump', [4], 10, true);
-            newFigure.animations.add('normal', [5], 10, true);
-            newFigure.body.collideWorldBounds = true;
-        }*/
+        this.generateFigureLoop = this.game.time.events.loop(Phaser.Timer.SECOND * 3, this.createNewFigure, this);
 
     },
 
@@ -70,19 +46,32 @@ alabebop.LevelRoundState.prototype = {
                 newFigure;
 
             if(probability  <= this.probabilityK ) {
-                console.log('probability: ', this.probabilityK, 'create k')
-                newFigure = this.figures.create( 310, 116, 'figure_k');
+
+                newFigure = this.figures.create( 308, 116, 'figure_k');
 
             } else {
-                console.log('probability: ', this.probabilityK, 'create t')
-                newFigure = this.figures.create( 310, 116, 'figure_2');
+
+                newFigure = this.figures.create( 308, 116, 'figure_2');
+
             }
 
             newFigure.frame = 5;
             newFigure.body.collideWorldBounds = true;
+            newFigure.timer = this.game.time.events.add(Phaser.Timer.SECOND, this.jump, newFigure);
+
+        } else {
+            //remove generate figure timer
+            this.game.time.events.remove(this.generateFigureLoop);
 
         }
 
+    },
+
+    //this is pointed to the figure sprite
+    jump: function() {
+        //this.game.physics.enable(newFigure, Phaser.Physics.ARCADE);
+        this.body.bounce.y = 0.5 + Math.ceil(Math.random()) * .3;
+        this.body.bounce.x = 0.5 + Math.ceil(Math.random()) * .3;
     },
 
     createPlanks: function() {
