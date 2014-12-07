@@ -5,13 +5,12 @@ alabebop.GameSetting = function() {
     this.setting = {
         totalLevels : 5,
         totalFigures : 10,
-        numPlanks : [4, 5, 6, 7, 3],
-        gridSizes : [100, 80, 60, 60, 200]
+        numRows : [4, 5, 6, 7, 3]
     }
 
     this.levelData = {
-        level : 1,
-        round : 1,
+        level : -1,
+        round : -1,
         currentScore : 0,
         totalScore : 0,
         levelReplay : false,

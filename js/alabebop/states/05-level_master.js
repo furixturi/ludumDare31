@@ -61,7 +61,7 @@ alabebop.LevelMasterState.prototype = {
 
     isFirstLevel : function () {
 
-        return this.levelData.level === 1;
+        return this.levelData.level === -1;
 
     },
 

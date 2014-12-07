@@ -44,7 +44,14 @@ alabebop.LevelRoundState.prototype = {
         this.planks = this.game.add.group();
         this.planks.enableBody = true;
 
-        for ( var i = 0; i < this.game.gameSetting.setting.numPlanks[this.levelData.level]; i++) {
+        this.numRows = this.game.gameSetting.setting.numRows[this.levelData.level];
+
+        this.paddingTop = this.paddingBottom = 260;
+        this.paddingLeft = this.paddingRight = 70;
+        this.rowDistance = Math.round(
+            (this.game.height - this.paddingTop - this.paddingBottom) / this.numRows);
+
+        for ( var i = 0; i < this.numRows; i++) {
 
             this.createNewPlank(i)
 
@@ -56,32 +63,26 @@ alabebop.LevelRoundState.prototype = {
 
     },
 
-    createNewPlank : function(index) {
-        var grid = this.calcGrid(index);
-        var x = index === 0 ? this.game.world.centerX :
-            grid.minX + Math.ceil(Math.random() * this.game.gameSetting.setting.gridSizes[this.levelData.level]);
-        var y = index === 0 ? 200 :
-            grid.minY + Math.ceil(Math.random() * this.game.gameSetting.setting.gridSizes[this.levelData.level]);
+    createNewPlank : function(row) {
+        var x = this.paddingLeft +
+            Math.random() * (this.game.width - this.paddingLeft -this.paddingRight),
+            y = this.paddingTop + row * this.rowDistance;
 
         var newPlank = this.planks.create( x, y, 'plank');
-        newPlank.anchor.setTo(0.5, 0.5);
         newPlank.body.allowGravity = false;
         newPlank.body.immovable = true;
     },
 
-    calcGrid : function(index) {
-        var paddingLeft,
-            paddingRight = paddingLeft = 70,
-            paddingTop = 200,
-            paddingBottom = 260,
-            gridSize = this.game.gameSetting.setting.gridSizes[this.levelData.level],
-            grid = {
-                minX : paddingLeft,
-                minY : paddingTop
-            };
+    newPlankPos : function(index) {
 
-        return grid;
+        if( !this.grid ) {
+            this.grid = this.calcGrid(this.game.gameSetting.setting.gridSizes[this.levelData.level])
+        }
 
+        return {
+            minX : 200,
+            minY : 260
+        }
 
     },
 
@@ -94,11 +95,11 @@ alabebop.LevelRoundState.prototype = {
 
             if(probability  <= this.probabilityK ) {
 
-                newFigure = this.figures.create( 308, 116, 'figure_k');
+                newFigure = this.figures.create( 292, 100, 'figure_k');
 
             } else {
 
-                newFigure = this.figures.create( 308, 116, 'figure_t');
+                newFigure = this.figures.create( 292, 100, 'figure_t');
 
             }
 
@@ -117,10 +118,14 @@ alabebop.LevelRoundState.prototype = {
 
     jumpFigure: function(figure) {
         figure.frame = 4;
+
         figure.body.velocity.x = (Math.random() -.5) * 400;
+
         figure.body.allowGravity = true;
+
         figure.body.bounce.y = 0.5 + Math.ceil(Math.random()) * .3;
         figure.body.bounce.x = 0.5 + Math.ceil(Math.random()) * .3;
+
         this.game.time.events.remove(figure.timer);
     }
 
