@@ -36,7 +36,7 @@ alabebop.LevelRoundState.prototype = {
 
         this.createNewFigure();
 
-        this.generateFigureLoop = this.game.time.events.loop(Phaser.Timer.SECOND * 3, this.createNewFigure, this);
+        this.generateFigureLoop = this.game.time.events.loop(Phaser.Timer.SECOND * 5, this.createNewFigure, this);
 
     },
 
@@ -95,15 +95,15 @@ alabebop.LevelRoundState.prototype = {
 
             if(probability  <= this.probabilityK ) {
 
-                newFigure = this.figures.create( 292, 100, 'figure_k');
+                newFigure = this.figures.create( 292, 96, 'figure_k');
 
             } else {
 
-                newFigure = this.figures.create( 292, 100, 'figure_t');
+                newFigure = this.figures.create( 292, 104, 'figure_t');
 
             }
 
-            newFigure.frame = 5;
+            newFigure.frame = 6;
             newFigure.body.allowGravity = false;
             newFigure.body.collideWorldBounds = true;
             newFigure.timer = this.game.time.events.add(Phaser.Timer.SECOND * 2, this.jumpFigure, this, newFigure);
