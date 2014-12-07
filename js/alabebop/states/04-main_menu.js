@@ -4,7 +4,7 @@ alabebop.MainMenuState.prototype = {
 
     init: function(levelData) {
 
-        this.levelData = levelData ? levelData : $.extend({}, alabebop.gameSetting.levelDataInitial)
+        this.levelData = levelData ? levelData : this.game.gameSetting.levelData
 
     },
 
@@ -17,7 +17,7 @@ alabebop.MainMenuState.prototype = {
 
         //PHASE 2: if replay, create level selection menu
 
-        /*if( this.levelData.replayGame) {
+        /*if( this.levelData.gameReplay) {
 
         }*/
 

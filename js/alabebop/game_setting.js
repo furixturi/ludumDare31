@@ -1,30 +1,41 @@
 var alabebop = {};
 
-alabebop.gameSetting = {
+alabebop.GameSetting = function() {
 
-    levelDataInitial : {
-        level : 1,
-        round : 1,
-        totalLevels : 5,
-        currentScore : 0,
-        totalScore : 0,
-        replayGame : false
-    },
-
-    levelSetting : []
-
-}
-
-(function(gameSetting){
-
-    for (var i = 0; i < gameSetting.levelDataInitial.totalLevels; i++) {
-
-        gameSetting.levelSetting.push({
-
-
-
-        })
+    this.setting = {
+        totalLevels : 5
 
     }
 
-})(alabebop.gameSetting)
+    this.levelData = {
+        level : 1,
+        round : 1,
+        currentScore : 0,
+        totalScore : 0,
+        levelReplay : false,
+        gameReplay : false
+    };
+
+    this.levels = [];
+
+    this.init();
+}
+
+alabebop.GameSetting.prototype = {
+
+    init : function() {
+
+        this.refreshLevels()
+
+    },
+
+    refreshLevels : function() {
+
+        for( var i = 0; i < this.setting.totalLevels; i++ ) {
+
+        }
+
+    }
+
+}
+

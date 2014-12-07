@@ -5,6 +5,8 @@ alabebop.Game.prototype = {
     start: function() {
         var game = new Phaser.Game(640, 960, Phaser.AUTO, 'game-area');
 
+        game.gameSetting = new alabebop.GameSetting();
+
         game.state.add('boot', alabebop.BootState);
         game.state.add('preload', alabebop.PreloadState);
         game.state.add('main-intro', alabebop.MainIntroState);

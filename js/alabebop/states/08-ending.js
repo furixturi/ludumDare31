@@ -17,8 +17,10 @@ alabebop.EndingState.prototype = {
 
     playAgain: function() {
 
-        this.levelData = $.extend({}, alabebop.gameSetting.levelDataInitial);
-        this.levelData.replayGame = true;
+        this.game.gameSetting = new alabebop.GameSetting()
+
+        this.levelData = this.game.gameSetting.levelData;
+        this.levelData.gameReplay = true;
 
         this.game.state.start('main-menu', true, false, this.levelData);
 
