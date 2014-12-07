@@ -3,7 +3,8 @@ var alabebop = {};
 alabebop.GameSetting = function() {
 
     this.setting = {
-        totalLevels : 5
+        totalLevels : 5,
+        totalFigures : 10
 
     }
 

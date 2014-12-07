@@ -26,7 +26,7 @@ alabebop.PreloadState.prototype = {
         this.game.load.image('loseMessage_2', 'assets/level-master/again.png');
 
         //level-round state assets
-        this.game.load.image('figure_1', 'assets/level-round/figure_1.png');
+        this.game.load.spritesheet('figure_k', 'assets/level-round/figure_k.png', 34, 50);
         this.game.load.image('figure_2', 'assets/level-round/figure_2.png');
         this.game.load.image('pool_0', 'assets/level-round/pool_0.png');
         this.game.load.image('pool_1', 'assets/level-round/pool_1.png');
