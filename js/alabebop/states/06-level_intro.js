@@ -7,7 +7,7 @@ alabebop.LevelIntroState.prototype = {
     },
 
     create: function() {
-
+console.log('level-intro')
         var tweenIntro = this.game.add.tween({}).
             to({alpha: 0}, 1000, Phaser.Easing.Linear.None, true);
 
