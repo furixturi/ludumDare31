@@ -4,7 +4,8 @@ alabebop.LevelMasterState.prototype = {
 
     init: function(levelData) {
 
-        this.levelData = levelData ? levelData : this.game.gameSetting.levelData;
+        this.levelData = levelData;
+            //? levelData : this.game.gameSetting.levelData;
 
     },
 
@@ -33,14 +34,16 @@ alabebop.LevelMasterState.prototype = {
     createWinScreen : function () {
 
         //create win message
+        var winMessage_1 = game.add.sprite(game.world.centerX - 162, 200, 'winMessage_1');
+        var winMessage_1 = game.add.sprite(game.world.centerX - 161, 320, 'winMessage_2');
 
         //create next level button
         /**
          * API: new Button(game, x, y, asset key, callback, callbackContext, overFrame, outFrame, downFrame, upFrame)
          */
-        var nextLevelBtn = game.add.button(game.world.centerX - 200, 400, 'nextLevelBtn', nextLevel, this, 1, 0, 2);
+        var nextLevelBtn = game.add.button(game.world.centerX - 211, 400, 'nextLevelBtn', nextLevel, this, 1, 0, 2);
         //create replay this level button
-        var nextRoundBtn = game.add.button(game.world.centerX - 200, 480, 'nextRoundBtn', nextRound, this, 1, 0, 2);
+        var playAgainBtn = game.add.button(game.world.centerX - 211, 580, 'playAgainBtn', nextRound, this, 1, 0, 2);
 
 
     },
@@ -48,9 +51,10 @@ alabebop.LevelMasterState.prototype = {
     createLoseScreen : function () {
 
         //create lose message
-
+        var loseMessage_1 = game.add.sprite(game.world.centerX - 121, 200, 'loseMessage_1')
+        var loseMessage_2 = game.add.sprite(game.world.centerX - 161, 320, 'loseMessage_2')
         //create replay this level button
-        var nextRoundBtn = game.add.button(game.world.centerX - 200, 480, 'nextRoundBtn', nextRound, this, 1, 0, 2);
+        var playAgainBtn = game.add.button(game.world.centerX - 211, 480, 'playAgainBtn', nextRound, this, 1, 0, 2);
 
     },
 

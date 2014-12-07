@@ -4,13 +4,11 @@ alabebop.MainIntroState.prototype = {
 
     create : function () {
 
-        //TODO: add main intro assets
-
         //this.tweenFadeState()
-
+//fall through
         this.game.state.start('main-menu');
 
-    },
+    }/*,
 
     tweenFadeState : function () {
         this.game.add.tween({})
@@ -18,6 +16,6 @@ alabebop.MainIntroState.prototype = {
             .onComplete.add(function() {
                 this.game.state.start('main-menu');
             }, this);
-    }
+    }*/
 
 }

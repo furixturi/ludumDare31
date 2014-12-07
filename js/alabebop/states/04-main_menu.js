@@ -11,9 +11,11 @@ alabebop.MainMenuState.prototype = {
     create: function(){
 
         // create title
+        var title_1 = game.add.sprite(game.world.centerX - 211, 200, 'gameTitle_1')
+        var title_2 = game.add.sprite(game.world.centerX - 211, 320, 'gameTitle_2')
 
         // create play button
-        var playBtn = game.add.button(game.world.centerX - 200, 400, 'playBtn', tweenPlayState, this, 1, 0, 2);
+        var playBtn = game.add.button(game.world.centerX - 135, 400, 'playBtn', tweenPlayState, this, 1, 0, 2);
 
         //PHASE 2: if replay, create level selection menu
 
