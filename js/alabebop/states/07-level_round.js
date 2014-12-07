@@ -29,6 +29,14 @@ alabebop.LevelRoundState.prototype = {
 
     },
 
+    render: function() {
+        /*this.planks.forEach(function(plank){
+            this.game.debug.body(plank)
+        }, this)*/
+
+
+    },
+
     createFigures: function() {
         this.figures = this.game.add.group();
         this.figures.enableBody = true;
@@ -69,8 +77,17 @@ alabebop.LevelRoundState.prototype = {
             y = this.paddingTop + row * this.rowDistance;
 
         var newPlank = this.planks.create( x, y, 'plank');
+
+        newPlank.scale.setTo(2, 2)
+
         newPlank.body.allowGravity = false;
         newPlank.body.immovable = true;
+
+        newPlank.inputEnabled = true;
+        newPlank.input.enableDrag();
+        newPlank.input.setDragLock(true, false);
+        newPlank.input.boundsRect = new Phaser.Rectangle( 0, y - newPlank.height,
+            this.game.width, y + newPlank.height);
     },
 
     newPlankPos : function(index) {
