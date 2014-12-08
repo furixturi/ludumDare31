@@ -5,7 +5,9 @@ alabebop.GameSetting = function() {
     this.setting = {
         totalLevels : 4,
         totalFigures : 10,
-        numRows : [3, 4, 2, 1]
+        numRows : [3, 4, 2, 1],
+        numCars : [4, 3, 3, 2],
+        numSafeCars : [3, 2, 1, 0]
     }
 
     this.levelData = {

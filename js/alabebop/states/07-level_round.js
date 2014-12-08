@@ -60,26 +60,47 @@ alabebop.LevelRoundState.prototype = {
         this.cars = this.game.add.group();
         this.cars.enableBody = true;
         this.carScale = {x: 0.8, y: 0.8};
+        var numSafeCars = this.game.gameSetting.setting.numSafeCars[this.levelData.level],
+            carPosIdxAry = [];
+
+        for(var o = 0; o < this.game.gameSetting.setting.numCars[this.levelData.level]; o++) {
+            carPosIdxAry.push(o);
+        }
 
         var carWidth = this.game.cache.getImage('car_0').width / 2 * this.carScale.x,
             carHeight = this.game.cache.getImage('car_0').height * this.carScale.y,
-            carDistance = Math.round(this.game.width / 3),
+            carDistance = Math.round(this.game.width / 4),
             boundingBoxOffsetX = 18 * this.carScale.x;
 
-        var x = (carDistance - carWidth) / 2 ,
+        var xStart = (carDistance - carWidth) / 2,
             y = this.game.height - carHeight,
             newCar;
 
-        for( var i = 0; i < 3; i++ ) {
+        //create safe cars and place them randomly
+        for( var i = 0; i < numSafeCars; i++ ) {
 
-            var probability = Math.random(),
+            var posIdx = Math.floor(Math.random() * carPosIdxAry.length),
+                x = xStart + carPosIdxAry[posIdx] * carDistance;
+            carPosIdxAry.splice(posIdx, 1);
+
+            newCar = this.cars.create(x, y, 'car_0');
+            newCar.scale.setTo(this.carScale.x, this.carScale.y);
+            newCar.body.allowGravity = false;
+            newCar.body.immovable = true;
+            newCar.body.setSize( carWidth - boundingBoxOffsetX,
+                carHeight, boundingBoxOffsetX, 0)
+        }
+
+        //in the lefing spots randomly create other two types of cars
+        for( var j = 0; j < carPosIdxAry.length; j++ ) {
+
+                var posIdx = carPosIdxAry[j],
+                    probability = Math.random(),
                 carKey = '';
 
-            if(probability < .33) {
+            x = xStart + posIdx * carDistance;
 
-                carKey = 'car_0';
-
-            } else if( probability >= .33 && probability < .66) {
+            if(probability < .5) {
 
                 carKey = 'car_k';
 
@@ -95,7 +116,6 @@ alabebop.LevelRoundState.prototype = {
             newCar.body.immovable = true;
             newCar.body.setSize( carWidth - boundingBoxOffsetX,
                 carHeight, boundingBoxOffsetX, 0)
-            x += carDistance;
 
         }
 
@@ -191,7 +211,20 @@ alabebop.LevelRoundState.prototype = {
     update: function() {
 
         this.game.physics.arcade.collide(this.figures, this.planks)
-        this.game.physics.arcade.collide(this.figures, this.cars)
+        this.game.physics.arcade.collide(this.figures, this.cars, this.collisionCarHandler, null, this);
+
+    },
+
+    collisionCarHandler : function(figure, car) {
+
+        var figureKay = figure.key,
+            carKey = car.key;
+        console.log('boom', figure.body.touching, car.body.touching)
+        if(figure.body.touching.down && car.body.touching.up) {
+
+            figure.kill()
+            car.frame = 1;
+        }
 
     }
 
