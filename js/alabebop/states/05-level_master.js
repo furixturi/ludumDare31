@@ -11,9 +11,13 @@ alabebop.LevelMasterState.prototype = {
 
     create: function() {
 
-        if ( this.isFirstLevel() || this.isLastLevel() ) {
+        if ( this.isFirstLevel() ) {
 
             this.nextLevel();
+
+        } else if ( this.isLastLevel() && this.getWin() ) {
+
+            this.game.state.start('ending', true, false, this.levelData);
 
         } else {
 
@@ -84,7 +88,7 @@ alabebop.LevelMasterState.prototype = {
 
     isLastLevel : function () {
 
-        return this.levelData.level === this.game.gameSetting.setting.totalLevels;
+        return this.levelData.level === this.game.gameSetting.setting.totalLevels - 1;
 
     },
 
@@ -100,19 +104,12 @@ alabebop.LevelMasterState.prototype = {
 
         this.levelData.currentScore = 0;
 
-        this.levelData.round = 1;
+        this.levelData.round = 0;
 
-        if( !this.isLastLevel() ) {
+        this.levelData.level++;
 
-            this.levelData.level++;
+        this.game.state.start('level-intro', true, false, this.levelData);
 
-            this.game.state.start('level-intro', true, false, this.levelData);
-
-        } else {
-
-            this.game.state.start('ending', true, false, this.levelData);
-
-        }
 
     },
 

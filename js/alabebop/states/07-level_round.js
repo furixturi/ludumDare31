@@ -305,10 +305,7 @@ alabebop.LevelRoundState.prototype = {
                 car.frame = 1;
             }
 
-
         }
-
-
 
     },
 

@@ -8,6 +8,9 @@ alabebop.GameSetting = function() {
         numRows : [3, 4, 2, 1],
         numCars : [4, 3, 3, 2],
         numSafeCars : [3, 2, 1, 1],
+/*        numRows : [3, 2],
+        numCars : [4, 4],
+        numSafeCars : [3, 2],*/
         pointMap : {
             figure_k : {
                 car_0 : 5,
@@ -27,7 +30,7 @@ alabebop.GameSetting = function() {
 
     this.levelData = {
         level : -1,
-        round : -1,
+        round : 0,
         currentScore : 0,
         totalScore : 0,
         levelReplay : false,

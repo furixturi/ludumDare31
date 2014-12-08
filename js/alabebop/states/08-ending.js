@@ -7,6 +7,8 @@ alabebop.EndingState.prototype = {
     },
 
     create: function() {
+        //create scores
+
 
         // create game complete message
 
