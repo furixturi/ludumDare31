@@ -11,17 +11,24 @@ alabebop.MainMenuState.prototype = {
     create: function(){
 
         // create title
-        var title_1 = this.game.add.sprite(this.game.world.centerX - 211, 200, 'gameTitle_1')
+//        var title_1 = this.game.add.sprite(this.game.world.centerX - 211, 200, 'gameTitle_1')
         var title_2 = this.game.add.sprite(this.game.world.centerX - 211, 320, 'gameTitle_2')
 
+        var bg = this.game.add.sprite(0, 0, 'mainMenuBg');
+
+
         // create play button
-        var startBtn = this.game.add.button(70, 500, 'startBtn',
+        var startBtn = this.game.add.button(70, 744, 'startBtn',
 
             function(){
                 this.game.state.start('level-master', true, false, this.levelData);
             },
 
             this, 1, 0, 2 );
+
+        startBtn.input.useHandCursor = true;
+        startBtn.alpha = 0;
+        this.game.add.tween(startBtn).to({ alpha: 1}, 1500).start();
 
         //PHASE 2: if replay, create level selection menu
 

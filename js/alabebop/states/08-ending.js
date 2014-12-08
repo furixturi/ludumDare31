@@ -14,6 +14,7 @@ alabebop.EndingState.prototype = {
 
         // create play again button
         var homeBtn = this.game.add.button(70, 400, 'homeBtn', this.playAgain, this, 1, 0, 2);
+        homeBtn.input.useHandCursor = true;
 
     },
 

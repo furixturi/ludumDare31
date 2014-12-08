@@ -17,6 +17,9 @@ alabebop.PreloadState.prototype = {
         this.game.load.spritesheet('startBtn', 'assets/buttons/Button_start.png', 500, 110);
         this.game.load.spritesheet('homeBtn', 'assets/buttons/Button_home.png', 500, 110);
 
+        //main bg
+        this.game.load.image('mainMenuBg', 'assets/main-menu/bg_start.png');
+
         //win /lose bg
         this.game.load.image('winBg', 'assets/level-master/bg_success.png');
         this.game.load.image('loseBg', 'assets/level-master/bg_fail.png');

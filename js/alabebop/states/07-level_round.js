@@ -139,6 +139,7 @@ alabebop.LevelRoundState.prototype = {
         newPlank.body.immovable = true;
 
         newPlank.inputEnabled = true;
+        newPlank.input.useHandCursor = true;
         newPlank.input.enableDrag();
         newPlank.input.setDragLock(true, false);
         newPlank.input.boundsRect = new Phaser.Rectangle( 0, y - newPlank.height,

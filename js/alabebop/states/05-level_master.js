@@ -59,10 +59,11 @@ alabebop.LevelMasterState.prototype = {
          */
         var nextLevelBtn = this.game.add.button(70, 640, 'nextLevelBtn',
             this.nextLevel, this, 1, 0, 2);
+        nextLevelBtn.input.useHandCursor = true;
         //create replay this level button
         var playAgainBtn = this.game.add.button(70, 800, 'playAgainBtn',
             this.nextRound, this, 1, 0, 2);
-
+        playAgainBtn.input.useHandCursor = true;
 
     },
 
@@ -75,6 +76,7 @@ alabebop.LevelMasterState.prototype = {
         //create replay this level button
         var tryAgainBtn = this.game.add.button(70, 700, 'tryAgainBtn',
             this.nextRound, this, 1, 0, 2);
+        tryAgainBtn.input.useHandCursor = true;
 
     },
 
