@@ -25,6 +25,7 @@ alabebop.LevelRoundState.prototype = {
     },
 
     createFigures: function() {
+        this.figuresCreated = 0;
         this.figures = this.game.add.group();
         this.figures.enableBody = true;
         this.probabilityK = 0.3 + Math.ceil(Math.random()) * 0.3;
@@ -145,7 +146,7 @@ alabebop.LevelRoundState.prototype = {
 
         var boundingBoxOffsetX = 16;
 
-        if( this.figures.length < this.game.gameSetting.setting.totalFigures ) {
+        if( this.figuresCreated < this.game.gameSetting.setting.totalFigures ) {
 
             var probability = Math.random(),
                 newFigure;
@@ -166,6 +167,14 @@ alabebop.LevelRoundState.prototype = {
             newFigure.body.setSize(this.figureWidth - boundingBoxOffsetX * 2,
                 100, boundingBoxOffsetX, 0);
             newFigure.timer = this.game.time.events.add(Phaser.Timer.SECOND * 2, this.jumpFigure, this, newFigure);
+
+            newFigure.fadeOutTween = this.game.add.tween(newFigure).to({alpha: 0},
+                1000, Phaser.Easing.Linear.None);
+            newFigure.fadeOutTween.onComplete.add(function(){
+                newFigure.destroy();
+            }, this);
+
+            this.figuresCreated++;
 
         } else {
             //remove generate figure timer
@@ -211,13 +220,39 @@ alabebop.LevelRoundState.prototype = {
 
     update: function() {
 
+        if(!this.roundEnded()) {
+
+            this.checkFigureCollision();
+
+        } else {
+
+            this.game.state.start('level-master', true, false, this.levelData);
+
+        }
+
+
+    },
+
+    roundEnded: function() {
+
+        return this.figuresCreated === this.game.gameSetting.setting.totalFigures && this.figures.length === 0;
+
+    },
+
+    checkFigureCollision : function() {
+
         this.game.physics.arcade.collide(this.figures, this.planks, this.collisionHandlerPlank, null, this)
         this.game.physics.arcade.collide(this.figures, this.cars, this.collisionCarHandler, null, this);
+
 
         this.figures.forEach(function(figure){
 
             if(figure.body.onFloor()) {
                 figure.frame = 1;
+                figure.body.velocity.x = 0;
+                figure.body.velocity.y = 0;
+
+                figure.fadeOutTween.start();
             }
 
             if(figure.body.onWall()) {
@@ -228,14 +263,14 @@ alabebop.LevelRoundState.prototype = {
                 }
             }
 
-        });
+        }, this);
 
     },
 
     collisionCarHandler : function(figure, car) {
 
         if(figure.body.touching.down && car.body.touching.up && this.pointMap[figure.key][car.key]) {
-            figure.kill()
+            figure.destroy();
             car.frame = 1;
         }
 
