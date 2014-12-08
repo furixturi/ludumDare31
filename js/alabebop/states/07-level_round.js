@@ -15,6 +15,12 @@ alabebop.LevelRoundState.prototype = {
 
         //add background
         this.game.add.sprite(0, 0, 'castle');
+        this.currentScoreText = this.game.add.text(20, 10, 'score: 0', {
+            font : '32px Iceberg',
+            //fill : '#a23946',
+            fill : '#ffffff',
+            align : 'left'
+        });
 
         //create
         this.createFigures();
@@ -265,6 +271,8 @@ alabebop.LevelRoundState.prototype = {
 
                 if(!figure.pointCalculated){
                     this.levelData.currentScore += this.pointMap[figure.key].ground;
+                    this.showScore(figure, this.pointMap[figure.key].ground);
+
                     figure.pointCalculated = true;
                     this.figureActive--;
                 }
@@ -295,8 +303,10 @@ alabebop.LevelRoundState.prototype = {
         if(figure.body.touching.down && car.body.touching.up && this.pointMap[figure.key][car.key]) {
             if(!figure.pointCalculated){
                 this.levelData.currentScore += this.pointMap[figure.key][car.key];
+
                 figure.pointCalculated = true;
 
+                this.showScore(figure, this.pointMap[figure.key][car.key]);
                 figure.frame = 5;
 
                 figure.body.velocity.x = 0;
@@ -327,6 +337,28 @@ alabebop.LevelRoundState.prototype = {
         if( figure.body.touching.right && plank.body.touching.left ) {
             figure.frame = 2;
         }
+
+    },
+
+    showScore : function(figure, score) {
+
+        this.currentScoreText.text = 'score: ' + this.levelData.currentScore;
+
+        if(score > 0){
+            score = "+" + score;
+        }
+
+        var scoreText = this.game.add.text(figure.x, figure.y - 32, score, {
+            font : '32px Iceberg',
+            fill : '#373737',
+            align : 'left'
+        });
+
+        var hideScoreTextTween = this.game.add.tween(scoreText).to({alpha:0}, 2000);
+        hideScoreTextTween.onComplete.add(function(){
+            scoreText.destroy();
+        }, this);
+        hideScoreTextTween.start();
 
     }
 
