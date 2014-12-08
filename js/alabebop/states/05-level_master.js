@@ -84,7 +84,7 @@ alabebop.LevelMasterState.prototype = {
 
     isLastLevel : function () {
 
-        return this.levelData.level === this.levelData.totalLevels;
+        return this.levelData.level === this.game.gameSetting.setting.totalLevels;
 
     },
 

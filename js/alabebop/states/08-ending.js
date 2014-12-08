@@ -11,7 +11,7 @@ alabebop.EndingState.prototype = {
         // create game complete message
 
         // create play again button
-        var playAgainBtn = game.add.button(game.world.centerX - 200, 400, 'playAgainBtn', playAgain, this, 1, 0, 2);
+        var playAgainBtn = this.game.add.button(this.game.world.centerX - 200, 400, 'playAgainBtn', this.playAgain, this, 1, 0, 2);
 
     },
 
