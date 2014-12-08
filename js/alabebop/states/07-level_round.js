@@ -51,6 +51,7 @@ alabebop.LevelRoundState.prototype = {
     createPlanks: function() {
         this.planks = this.game.add.group();
         this.planks.enableBody = true;
+        this.plankWidth = this.game.cache.getImage('plank').width;
 
         this.numRows = this.game.gameSetting.setting.numRows[this.levelData.level];
 
@@ -73,7 +74,7 @@ alabebop.LevelRoundState.prototype = {
 
     createNewPlank : function(row) {
         var x = this.paddingLeft +
-            Math.random() * (this.game.width - this.paddingLeft -this.paddingRight),
+            Math.random() * (this.game.width - this.paddingLeft -this.paddingRight - this.plankWidth),
             y = this.paddingTop + row * this.rowDistance;
 
         var newPlank = this.planks.create( x, y, 'plank');
@@ -123,7 +124,10 @@ alabebop.LevelRoundState.prototype = {
     jumpFigure: function(figure) {
         figure.frame = 4;
 
-        figure.body.velocity.x = (Math.random() -.5) * 400;
+        do {
+            figure.body.velocity.x = (Math.random() -.5) * 400;
+        } while (!figure.body.velocity.x || Math.abs(figure.body.velocity.x) < 100)
+
 
         figure.body.allowGravity = true;
 
