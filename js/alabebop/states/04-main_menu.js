@@ -16,6 +16,12 @@ alabebop.MainMenuState.prototype = {
 
         var bg = this.game.add.sprite(0, 0, 'mainMenuBg');
 
+        var emailBtn = this.game.add.button(this.game.world.centerX - 124,
+            872, 'emailBtn', function(){
+                window.location.href= "mailto:alabebop@gmail.com"
+            }, this);
+
+        emailBtn.input.useHandCursor = true;
 
         // create play button
         var startBtn = this.game.add.button(70, 744, 'startBtn',

@@ -10,7 +10,7 @@ alabebop.PreloadState.prototype = {
         this.preloadBar.anchor.setTo(.5,.5);
 
 
-        //load game assets
+        /* load game assets */
 
         //button assets
         this.game.load.spritesheet('nextLevelBtn', 'assets/buttons/Button_nextBoom.png', 500, 110);
@@ -21,6 +21,8 @@ alabebop.PreloadState.prototype = {
 
         //main-menu bg
         this.game.load.image('mainMenuBg', 'assets/main-menu/bg_start.png');
+        this.game.load.image('emailBtn', 'assets/main-menu/email.png');
+
         //ending bg
         this.game.load.image('endingBg', 'assets/ending/bg_ending.png');
 
