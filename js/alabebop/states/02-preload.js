@@ -8,7 +8,9 @@ alabebop.PreloadState.prototype = {
         //this.preloadBar = this.add.sprite((320-158)/2, (480-50)/2, 'preloaderBar');
         this.preloadBar = this.add.sprite(this.game.world.centerX, this.game.world.centerY, 'preloaderBar');
         this.preloadBar.anchor.setTo(.5,.5);
-        //TODO: load game assets
+
+
+        //load game assets
 
         //button assets
         this.game.load.spritesheet('nextLevelBtn', 'assets/buttons/Button_nextBoom.png', 500, 110);
@@ -25,6 +27,9 @@ alabebop.PreloadState.prototype = {
         //level-master win / lose bg
         this.game.load.image('winBg', 'assets/level-master/bg_success.png');
         this.game.load.image('loseBg', 'assets/level-master/bg_fail.png');
+
+        //level-intro asset
+        this.game.load.image('instruction', 'assets/level-intro/intro.png');
 
         //level-round assets
         this.game.load.image('castle', 'assets/level-round/castle_bg.png');

@@ -3,8 +3,7 @@ alabebop.BootState = function (game) {};
 alabebop.BootState.prototype = {
 
     preload : function () {
-        //TODO: load preloader assets
-        //this.load.image('preloaderBg', 'img/loading-bg.png');
+        //load preloader assets
         this.load.image('preloaderBar', 'assets/preload/preloader.png');
     },
 
