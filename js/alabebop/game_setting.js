@@ -10,9 +10,9 @@ alabebop.GameSetting = function() {
         numSafeCars : [3, 2, 1, 1],       */
         totalLevels : 2,
         totalFigures : 1,
-        numRows : [3, 4],
+        numRows : [1, 4],
         numCars : [4, 3],
-        numSafeCars : [3, 2],
+        numSafeCars : [4, 2],
         pointMap : {
             figure_k : {
                 car_0 : 5,

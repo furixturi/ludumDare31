@@ -13,6 +13,7 @@ alabebop.PreloadState.prototype = {
         //button assets
         this.game.load.spritesheet('nextLevelBtn', 'assets/buttons/Button_nextBoom.png', 500, 110);
         this.game.load.spritesheet('playAgainBtn', 'assets/buttons/Button_playAgain.png', 500, 110);
+        this.game.load.spritesheet('tryAgainBtn', 'assets/buttons/Button_tryAgain.png', 500, 110);
         this.game.load.spritesheet('startBtn', 'assets/buttons/Button_start.png', 500, 110);
         this.game.load.spritesheet('homeBtn', 'assets/buttons/Button_home.png', 500, 110);
 
