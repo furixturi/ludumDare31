@@ -29,11 +29,10 @@ alabebop.PreloadState.prototype = {
         this.game.load.image('castle', 'assets/level-round/castle_bg.png');
         this.game.load.spritesheet('figure_k', 'assets/level-round/figure_k_b.png', 68,100);
         this.game.load.spritesheet('figure_t', 'assets/level-round/figure_t_b.png', 68, 100);
-        this.game.load.image('pool_0', 'assets/level-round/pool_0.png');
-        this.game.load.image('pool_1', 'assets/level-round/pool_1.png');
-        this.game.load.image('pool_2', 'assets/level-round/pool_2.png');
-        this.game.load.image('plank', 'assets/level-round/plank.png');
-        this.game.load.image('car_0', 'assets/level-round/pool_car.png');
+        this.game.load.spritesheet('car_0', 'assets/level-round/pool_car_w.png', 140, 120);
+        this.game.load.spritesheet('car_k', 'assets/level-round/pool_car_r.png', 140, 120);
+        this.game.load.spritesheet('car_t', 'assets/level-round/pool_car_b.png', 140, 120);
+        this.game.load.image('plank', 'assets/level-round/plank_140x20.png');
 
     },
 
