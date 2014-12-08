@@ -3,14 +3,16 @@ var alabebop = {};
 alabebop.GameSetting = function() {
 
     this.setting = {
-        totalLevels : 4,
+/*        totalLevels : 4,
         totalFigures : 10,
         numRows : [3, 4, 2, 1],
         numCars : [4, 3, 3, 2],
-        numSafeCars : [3, 2, 1, 1],
-/*        numRows : [3, 2],
-        numCars : [4, 4],
-        numSafeCars : [3, 2],*/
+        numSafeCars : [3, 2, 1, 1],       */
+        totalLevels : 2,
+        totalFigures : 1,
+        numRows : [3, 4],
+        numCars : [4, 3],
+        numSafeCars : [3, 2],
         pointMap : {
             figure_k : {
                 car_0 : 5,

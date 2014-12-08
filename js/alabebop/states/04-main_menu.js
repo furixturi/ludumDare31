@@ -15,7 +15,7 @@ alabebop.MainMenuState.prototype = {
         var title_2 = this.game.add.sprite(this.game.world.centerX - 211, 320, 'gameTitle_2')
 
         // create play button
-        var playBtn = this.game.add.button(this.game.world.centerX - 135, 500, 'playBtn',
+        var startBtn = this.game.add.button(70, 500, 'startBtn',
 
             function(){
                 this.game.state.start('level-master', true, false, this.levelData);

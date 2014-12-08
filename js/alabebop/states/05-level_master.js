@@ -37,14 +37,14 @@ alabebop.LevelMasterState.prototype = {
     },
 
     createScore : function (color) {
-        var score = this.game.add.text(240, 210, this.levelData.currentScore, {
-            font : "bold 150px Iceberg",
+        var score = this.game.add.text(this.game.world.centerX, 224, this.levelData.currentScore, {
+            font : "150px Iceberg",
             fill : color,
             align : 'left'
         });
 
 
-//        score.anchor.setTo(0.5, 0.5);
+        score.anchor.setTo(0.5, 0.5);
 
     },
 
@@ -54,30 +54,35 @@ alabebop.LevelMasterState.prototype = {
 
         this.createScore('#a23946');
 
-        //create win message
-        //var winMessage_1 = this.game.add.sprite(this.game.world.centerX - 162, 300, 'winMessage_1');
-        //var winMessage_1 = this.game.add.sprite(this.game.world.centerX - 161, 420, 'winMessage_2');
-
         //create next level button
         /**
          * API: new Button(game, x, y, asset key, callback, callbackContext, overFrame, outFrame, downFrame, upFrame)
          */
-        var nextLevelBtn = this.game.add.button(this.game.world.centerX - 211, 550, 'nextLevelBtn',
+        var nextLevelBtn = this.game.add.button(70, 640, 'nextLevelBtn',
             this.nextLevel, this, 1, 0, 2);
         //create replay this level button
-        var playAgainBtn = this.game.add.button(this.game.world.centerX - 211, 730, 'playAgainBtn',
+        var playAgainBtn = this.game.add.button(70, 800, 'playAgainBtn',
             this.nextRound, this, 1, 0, 2);
+        //create win message
+        //var winMessage_1 = this.game.add.sprite(this.game.world.centerX - 162, 300, 'winMessage_1');
+        //var winMessage_1 = this.game.add.sprite(this.game.world.centerX - 161, 420, 'winMessage_2');
+
+
 
 
     },
 
     createLoseScreen : function () {
 
+        var bg = this.game.add.sprite(0, 0, 'loseBg');
+
+        this.createScore('#373737');
+
         //create lose message
-        var loseMessage_1 = this.game.add.sprite(this.game.world.centerX - 121, 300, 'loseMessage_1')
-        var loseMessage_2 = this.game.add.sprite(this.game.world.centerX - 161, 420, 'loseMessage_2')
+        // var loseMessage_1 = this.game.add.sprite(this.game.world.centerX - 121, 300, 'loseMessage_1')
+        // var loseMessage_2 = this.game.add.sprite(this.game.world.centerX - 161, 420, 'loseMessage_2')
         //create replay this level button
-        var playAgainBtn = this.game.add.button(this.game.world.centerX - 211, 580, 'playAgainBtn',
+        var playAgainBtn = this.game.add.button(70, 700, 'playAgainBtn',
             this.nextRound, this, 1, 0, 2);
 
     },
