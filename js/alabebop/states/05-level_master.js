@@ -21,7 +21,6 @@ alabebop.LevelMasterState.prototype = {
 
         } else {
 
-            this.createScore();
 
             if( this.getWin() ) {
 
@@ -37,23 +36,27 @@ alabebop.LevelMasterState.prototype = {
 
     },
 
-    createScore : function () {
-
-        var score = this.game.add.text(this.game.world.centerX, 150, this.levelData.currentScore, {
-            font : "bold 150px Arial",
-            fill : "#ed525b",
+    createScore : function (color) {
+        var score = this.game.add.text(240, 210, this.levelData.currentScore, {
+            font : "bold 150px Iceberg",
+            fill : color,
             align : 'left'
         });
 
-        score.anchor.setTo(0.5, 0.5);
+
+//        score.anchor.setTo(0.5, 0.5);
 
     },
 
     createWinScreen : function () {
 
+        var bg = this.game.add.sprite(0, 0, 'winBg');
+
+        this.createScore('#a23946');
+
         //create win message
-        var winMessage_1 = this.game.add.sprite(this.game.world.centerX - 162, 300, 'winMessage_1');
-        var winMessage_1 = this.game.add.sprite(this.game.world.centerX - 161, 420, 'winMessage_2');
+        //var winMessage_1 = this.game.add.sprite(this.game.world.centerX - 162, 300, 'winMessage_1');
+        //var winMessage_1 = this.game.add.sprite(this.game.world.centerX - 161, 420, 'winMessage_2');
 
         //create next level button
         /**
