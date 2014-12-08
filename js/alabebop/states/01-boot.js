@@ -10,7 +10,7 @@ alabebop.BootState.prototype = {
 
     create : function () {
         //setup game environment, input, etc...
-        this.game.input.maxPointers = 1;
+        //this.game.input.maxPointers = 1;
         this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
         this.scale.minWidth = 320;
         this.scale.minHeight = 480;

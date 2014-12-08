@@ -62,16 +62,17 @@ alabebop.LevelRoundState.prototype = {
         this.cars = this.game.add.group();
         this.cars.enableBody = true;
         this.carScale = {x: 0.8, y: 0.8};
-        var numSafeCars = this.game.gameSetting.setting.numSafeCars[this.levelData.level],
+        var numCars = this.game.gameSetting.setting.numCars[this.levelData.level],
+            numSafeCars = this.game.gameSetting.setting.numSafeCars[this.levelData.level],
             carPosIdxAry = [];
 
-        for(var o = 0; o < this.game.gameSetting.setting.numCars[this.levelData.level]; o++) {
+        for(var o = 0; o < numCars; o++) {
             carPosIdxAry.push(o);
         }
 
         var carWidth = this.game.cache.getImage('car_0').width / 2 * this.carScale.x,
             carHeight = this.game.cache.getImage('car_0').height * this.carScale.y,
-            carDistance = Math.round(this.game.width / 4),
+            carDistance = Math.round(this.game.width / numCars),
             boundingBoxOffsetX = 18 * this.carScale.x;
 
         var xStart = (carDistance - carWidth) / 2,
@@ -168,9 +169,15 @@ alabebop.LevelRoundState.prototype = {
                 100, boundingBoxOffsetX, 0);
             newFigure.timer = this.game.time.events.add(Phaser.Timer.SECOND * 2, this.jumpFigure, this, newFigure);
 
-            newFigure.fadeOutTween = this.game.add.tween(newFigure).to({alpha: 0},
+            newFigure.dieTween = this.game.add.tween(newFigure).to({alpha: 0},
                 1000, Phaser.Easing.Linear.None);
-            newFigure.fadeOutTween.onComplete.add(function(){
+            newFigure.dieTween.onComplete.add(function(){
+                newFigure.destroy();
+            }, this);
+
+            newFigure.successTween = this.game.add.tween(newFigure).to({alpha: 0},
+                500, Phaser.Easing.Linear.None);
+            newFigure.successTween.onComplete.add(function(){
                 newFigure.destroy();
             }, this);
 
@@ -225,6 +232,7 @@ alabebop.LevelRoundState.prototype = {
             this.checkFigureCollision();
 
         } else {
+            console.log('ending Point', this.levelData.currentScore)
 
             this.game.state.start('level-master', true, false, this.levelData);
 
@@ -252,7 +260,12 @@ alabebop.LevelRoundState.prototype = {
                 figure.body.velocity.x = 0;
                 figure.body.velocity.y = 0;
 
-                figure.fadeOutTween.start();
+                if(!figure.pointCalculated){
+                    this.levelData.currentScore += this.pointMap[figure.key].ground;
+                    figure.pointCalculated = true;
+                }
+
+                figure.dieTween.start();
             }
 
             if(figure.body.onWall()) {
@@ -268,12 +281,6 @@ alabebop.LevelRoundState.prototype = {
     },
 
     collisionCarHandler : function(figure, car) {
-
-        if(figure.body.touching.down && car.body.touching.up && this.pointMap[figure.key][car.key]) {
-            figure.destroy();
-            car.frame = 1;
-        }
-
         if( figure.body.touching.left && car.body.touching.right ) {
             figure.frame = 3;
         }
@@ -281,6 +288,24 @@ alabebop.LevelRoundState.prototype = {
         if( figure.body.touching.right && car.body.touching.left ) {
             figure.frame = 2;
         }
+        if(figure.body.touching.down && car.body.touching.up && this.pointMap[figure.key][car.key]) {
+            if(!figure.pointCalculated){
+                this.levelData.currentScore += this.pointMap[figure.key][car.key];
+                figure.pointCalculated = true;
+
+                figure.frame = 5;
+
+                figure.body.velocity.x = 0;
+                figure.body.velocity.y = 0;
+
+                figure.successTween.start();
+                car.frame = 1;
+            }
+
+
+        }
+
+
 
     },
 
