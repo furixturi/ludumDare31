@@ -7,6 +7,7 @@ alabebop.LevelRoundState.prototype = {
     },
 
     create: function() {
+        this.pointMap = this.game.gameSetting.setting.pointMap;
 
         //enable physics
         this.game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -210,24 +211,62 @@ alabebop.LevelRoundState.prototype = {
 
     update: function() {
 
-        this.game.physics.arcade.collide(this.figures, this.planks)
+        this.game.physics.arcade.collide(this.figures, this.planks, this.collisionHandlerPlank, null, this)
         this.game.physics.arcade.collide(this.figures, this.cars, this.collisionCarHandler, null, this);
+
+        this.figures.forEach(function(figure){
+
+            if(figure.body.onFloor()) {
+                figure.frame = 1;
+            }
+
+            if(figure.body.onWall()) {
+                if(figure.x <= 0) {
+                    figure.frame = 3;
+                } else {
+                    figure.frame = 2;
+                }
+            }
+
+        });
 
     },
 
     collisionCarHandler : function(figure, car) {
 
-        var figureKay = figure.key,
-            carKey = car.key;
-        console.log('boom', figure.body.touching, car.body.touching)
-        if(figure.body.touching.down && car.body.touching.up) {
-
+        if(figure.body.touching.down && car.body.touching.up && this.pointMap[figure.key][car.key]) {
             figure.kill()
             car.frame = 1;
         }
 
+        if( figure.body.touching.left && car.body.touching.right ) {
+            figure.frame = 3;
+        }
+
+        if( figure.body.touching.right && car.body.touching.left ) {
+            figure.frame = 2;
+        }
+
+    },
+
+    collisionHandlerPlank : function(figure, plank) {
+
+        if(figure.body.touching.up && plank.body.touching.down ) {
+            figure.frame = 0;
+        }
+
+        if( figure.body.touching.down && plank.body.touching.up ) {
+            figure.frame = 5;
+        }
+
+        if( figure.body.touching.left && plank.body.touching.right ) {
+            figure.frame = 3;
+        }
+
+        if( figure.body.touching.right && plank.body.touching.left ) {
+            figure.frame = 2;
+        }
+
     }
-
-
 
 }
