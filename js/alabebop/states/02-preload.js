@@ -6,8 +6,8 @@ alabebop.PreloadState.prototype = {
         // progress bar
         //this.preloadBg = this.add.sprite((320-297)/2, (480-145)/2, 'preloaderBg');
         //this.preloadBar = this.add.sprite((320-158)/2, (480-50)/2, 'preloaderBar');
-        this.preloadBar = this.add.sprite((320-100)/2, 200, 'preloaderBar');
-
+        this.preloadBar = this.add.sprite(this.game.world.centerX, this.game.world.centerY, 'preloaderBar');
+        this.preloadBar.anchor.setTo(.5,.5);
         //TODO: load game assets
 
         //button assets
@@ -17,24 +17,16 @@ alabebop.PreloadState.prototype = {
         this.game.load.spritesheet('startBtn', 'assets/buttons/Button_start.png', 500, 110);
         this.game.load.spritesheet('homeBtn', 'assets/buttons/Button_home.png', 500, 110);
 
-        //main bg
+        //main-menu bg
         this.game.load.image('mainMenuBg', 'assets/main-menu/bg_start.png');
+        //ending bg
+        this.game.load.image('endingBg', 'assets/ending/bg_ending.png');
 
-        //win /lose bg
+        //level-master win / lose bg
         this.game.load.image('winBg', 'assets/level-master/bg_success.png');
         this.game.load.image('loseBg', 'assets/level-master/bg_fail.png');
 
-        //main-menu state assets
-        this.game.load.image('gameTitle_1', 'assets/main-menu/fall.png');
-        this.game.load.image('gameTitle_2', 'assets/main-menu/correctly.png');
-
-        //level-master state assets
-        this.game.load.image('winMessage_1', 'assets/level-master/well.png');
-        this.game.load.image('winMessage_2', 'assets/level-master/done.png');
-        this.game.load.image('loseMessage_1', 'assets/level-master/try.png');
-        this.game.load.image('loseMessage_2', 'assets/level-master/again.png');
-
-        //level-round state assets
+        //level-round assets
         this.game.load.image('castle', 'assets/level-round/castle_bg.png');
         this.game.load.spritesheet('figure_k', 'assets/level-round/figure_k_b.png', 68,100);
         this.game.load.spritesheet('figure_t', 'assets/level-round/figure_t_b.png', 68, 100);

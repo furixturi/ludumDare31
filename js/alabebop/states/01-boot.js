@@ -5,7 +5,7 @@ alabebop.BootState.prototype = {
     preload : function () {
         //TODO: load preloader assets
         //this.load.image('preloaderBg', 'img/loading-bg.png');
-        this.load.image('preloaderBar', 'assets/preload/preloader-bar.png');
+        this.load.image('preloaderBar', 'assets/preload/preloader.png');
     },
 
     create : function () {
