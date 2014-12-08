@@ -26,6 +26,7 @@ alabebop.LevelRoundState.prototype = {
 
     createFigures: function() {
         this.figuresCreated = 0;
+        this.figureActive = this.game.gameSetting.setting.totalFigures;
         this.figures = this.game.add.group();
         this.figures.enableBody = true;
         this.probabilityK = 0.3 + Math.ceil(Math.random()) * 0.3;
@@ -45,7 +46,8 @@ alabebop.LevelRoundState.prototype = {
 
         this.numRows = this.game.gameSetting.setting.numRows[this.levelData.level];
 
-        this.paddingTop = this.paddingBottom = 260;
+        this.paddingTop = 200;
+        this.paddingBottom = 200;
         this.paddingLeft = this.paddingRight = 70;
         this.rowDistance = Math.round(
             (this.game.height - this.paddingTop - this.paddingBottom) / this.numRows);
@@ -127,11 +129,11 @@ alabebop.LevelRoundState.prototype = {
     createNewPlank : function(row) {
         var x = this.paddingLeft +
             Math.random() * (this.game.width - this.paddingLeft -this.paddingRight - this.plankWidth),
-            y = this.paddingTop + row * this.rowDistance;
+            y = this.paddingTop + (row +.5) * this.rowDistance;
 
         var newPlank = this.planks.create( x, y, 'plank');
 
-        //newPlank.scale.setTo(2, 2)
+        newPlank.scale.setTo(1.4, 1.4)
 
         newPlank.body.allowGravity = false;
         newPlank.body.immovable = true;
@@ -178,6 +180,7 @@ alabebop.LevelRoundState.prototype = {
             newFigure.successTween = this.game.add.tween(newFigure).to({alpha: 0},
                 500, Phaser.Easing.Linear.None);
             newFigure.successTween.onComplete.add(function(){
+                this.figureActive--;
                 newFigure.destroy();
             }, this);
 
@@ -232,7 +235,6 @@ alabebop.LevelRoundState.prototype = {
             this.checkFigureCollision();
 
         } else {
-            console.log('ending Point', this.levelData.currentScore)
 
             this.game.state.start('level-master', true, false, this.levelData);
 
@@ -243,7 +245,7 @@ alabebop.LevelRoundState.prototype = {
 
     roundEnded: function() {
 
-        return this.figuresCreated === this.game.gameSetting.setting.totalFigures && this.figures.length === 0;
+        return this.figuresCreated === this.game.gameSetting.setting.totalFigures && this.figureActive === 0;
 
     },
 
@@ -257,15 +259,16 @@ alabebop.LevelRoundState.prototype = {
 
             if(figure.body.onFloor()) {
                 figure.frame = 1;
-                figure.body.velocity.x = 0;
+                //figure.body.velocity.x = 0;
                 figure.body.velocity.y = 0;
 
                 if(!figure.pointCalculated){
                     this.levelData.currentScore += this.pointMap[figure.key].ground;
                     figure.pointCalculated = true;
+                    this.figureActive--;
                 }
 
-                figure.dieTween.start();
+                //figure.dieTween.start();
             }
 
             if(figure.body.onWall()) {
